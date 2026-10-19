@@ -8,8 +8,8 @@ builder.Services.AddValidatorsFromAssemblyContaining<Program>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.SetDatabaseConfiguration();
-//builder.Services.SetMyVaccineAuthConfiguration();
-//builder.Services.SetDependencyInjection();
+builder.Services.SetMyLibraryAuthConfiguration();
+builder.Services.SetDependencyInjection();
 builder.Services.AddAutoMapper(cfg => { }, typeof(Program));
 
 var app = builder.Build();
