@@ -14,12 +14,14 @@ public static class DependencyInjections
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IBaseRepository<Author>, BaseRepository<Author>>();
         services.AddScoped<IBaseRepository<Category>, BaseRepository<Category>>();
+        services.AddScoped<IBaseRepository<Publisher>, BaseRepository<Publisher>>();
         #endregion
 
         #region Services Injection
         services.AddScoped<IUserService, UserService>();
         services.AddScoped<IAuthorService, AuthorService>();
         services.AddScoped<ICategoryService, CategoryService>();
+        services.AddScoped<IPublisherService, PublisherService>();
         #endregion
 
 
