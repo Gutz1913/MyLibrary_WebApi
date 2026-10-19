@@ -31,13 +31,6 @@
     <Folder Include="Configurations\Mappings\" />
     <Folder Include="Configurations\Validators\" />
     <Folder Include="Controllers\" />
-    <Folder Include="DTOs\Response\" />
-    <Folder Include="DTOs\Request\" />
-    <Folder Include="Literals\" />
-    <Folder Include="Repositories\Contracts\" />
-    <Folder Include="Repositories\Implementations\" />
-    <Folder Include="Services\Contracts\" />
-    <Folder Include="Services\Implementations\" />
   </ItemGroup>
 
 </Project>
