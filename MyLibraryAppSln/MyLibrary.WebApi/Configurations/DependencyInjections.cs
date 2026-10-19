@@ -1,4 +1,5 @@
-﻿using MyLibrary.WebApi.Repositories.Contracts;
+﻿using MyLibrary.WebApi.Models;
+using MyLibrary.WebApi.Repositories.Contracts;
 using MyLibrary.WebApi.Repositories.Implementations;
 using MyLibrary.WebApi.Services.Contracts;
 using MyLibrary.WebApi.Services.Implementations;
@@ -11,10 +12,12 @@ public static class DependencyInjections
     {
         #region Repositories Injection
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IBaseRepository<Author>, BaseRepository<Author>>();
         #endregion
 
         #region Services Injection
         services.AddScoped<IUserService, UserService>();
+        services.AddScoped<IAuthorService, AuthorService>();
         #endregion
 
 
