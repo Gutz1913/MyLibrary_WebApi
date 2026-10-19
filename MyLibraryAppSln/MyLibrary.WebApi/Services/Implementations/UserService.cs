@@ -1,15 +1,15 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using MyLibrary.WebApi.DTOs.Request;
 using MyLibrary.WebApi.DTOs.Response;
+using MyLibrary.WebApi.Literals;
 using MyLibrary.WebApi.Models;
 using MyLibrary.WebApi.Repositories.Contracts;
+using MyLibrary.WebApi.Services.Contracts;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using MyLibrary.WebApi.Repositories.Implementations;
-using MyLibrary.WebApi.Literals;
 
 namespace MyLibrary.WebApi.Services.Implementations;
 
