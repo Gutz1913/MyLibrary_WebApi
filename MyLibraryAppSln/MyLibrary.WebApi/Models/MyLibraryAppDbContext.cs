@@ -230,19 +230,43 @@ public class MyLibraryAppDbContext : IdentityDbContext<IdentityUser>
         // === BookAuthor Configurations ===
         builder.Entity<BookAuthor>(entity =>
         {
-            entity.HasKey(ba => new { ba.BookId, ba.AuthorId });
+            entity.HasKey(ba => ba.Id);
 
             entity.Property(ba => ba.RegisteredAt)
                   .IsRequired();
+
+            // === Relationship with Book ===
+            entity.HasOne(ba => ba.Book)
+                  .WithMany(b => b.BookAuthors)
+                  .HasForeignKey(ua => ua.BookId)
+                  .OnDelete(DeleteBehavior.Cascade);
+
+            // === Relaltionship with Author ===
+            entity.HasOne(ba => ba.Author)
+                  .WithMany(b => b.BookAuthors)
+                  .HasForeignKey(ba => ba.AuthorId)
+                  .OnDelete(DeleteBehavior.Cascade);
         });
 
         // === BookCategory Configurations ===
         builder.Entity<BookCategory>(entity =>
         {
-            entity.HasKey(bc => new { bc.BookId, bc.CategoryId });
+            entity.HasKey(bc => bc.Id);
 
             entity.Property(bc => bc.RegisteredAt)
                   .IsRequired();
+
+            // === Relationship with Book ===
+            entity.HasOne(bc => bc.Book)
+                  .WithMany(b => b.BookCategories)
+                  .HasForeignKey(bc => bc.BookId)
+                  .OnDelete(DeleteBehavior.Cascade);
+
+            // === Relaltionship with Category ===
+            entity.HasOne(bc => bc.Category)
+                  .WithMany(b => b.BookCategories)
+                  .HasForeignKey(bc => bc.CategoryId)
+                  .OnDelete(DeleteBehavior.Cascade);
         });
     }
 }
