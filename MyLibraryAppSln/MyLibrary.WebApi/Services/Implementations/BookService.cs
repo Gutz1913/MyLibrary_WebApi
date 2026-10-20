@@ -42,6 +42,7 @@ public class BookService : IBookService
                 .ThenInclude(ba => ba.Author)
             .Include(b => b.BookCategories)
                 .ThenInclude(ba => ba.Category)
+            .Include(b => b.Copies)
             .ToListAsync();
 
         var response = _mapper.Map<IEnumerable<BookResponseDTO>>(books);
@@ -58,6 +59,7 @@ public class BookService : IBookService
                 .ThenInclude(ba => ba.Author)
             .Include(b => b.BookCategories)
                 .ThenInclude(bc => bc.Category)
+            .Include(b => b.Copies)
             .FirstOrDefaultAsync();
 
         var response = _mapper.Map<BookResponseDTO>(book);
@@ -157,6 +159,7 @@ public class BookService : IBookService
                 .ThenInclude(ba => ba.Author)
             .Include(b => b.BookCategories)
                 .ThenInclude(bc => bc.Category)
+            .Include(b => b.Copies)
             .FirstOrDefaultAsync();
 
         await _bookRepository.Delete(book);
