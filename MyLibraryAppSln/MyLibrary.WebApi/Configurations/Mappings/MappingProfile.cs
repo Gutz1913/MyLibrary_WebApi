@@ -23,7 +23,7 @@ public class MappingProfile : Profile
             .ForMember(
                 dest => dest.CopiesCount, 
                 opt => opt.MapFrom(
-                    src => src.Copies != null ? 
+                    src => src != null ? 
                     src.Copies.Count : 0))
             .ForMember(
                 dest => dest.PublisherName,
@@ -82,6 +82,17 @@ public class MappingProfile : Profile
                     src => src.Book.Id))
             .ForMember(
                 dest => dest.BookTitle,
+                opt => opt.MapFrom(
+                    src => src.Book.Title));
+
+        CreateMap<CopyRequestDTO, Copy>();
+        CreateMap<Copy, CopyResponseDTO>()
+            .ForMember(
+                dest => dest.BookId, 
+                opt => opt.MapFrom(
+                    src => src.Book.Id))
+            .ForMember(
+                dest => dest.BookTitle, 
                 opt => opt.MapFrom(
                     src => src.Book.Title));
     }
