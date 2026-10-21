@@ -26,6 +26,11 @@ public class MappingProfile : Profile
                     src => src != null ? 
                     src.Copies.Count : 0))
             .ForMember(
+                dest => dest.ReservationsCount, 
+                opt => opt.MapFrom(
+                    src => src != null ?
+                    src.Reservations.Count : 0))
+            .ForMember(
                 dest => dest.PublisherName,
                 opt => opt.MapFrom(
                     src => src.Publisher.Name))
@@ -95,5 +100,24 @@ public class MappingProfile : Profile
                 dest => dest.BookTitle, 
                 opt => opt.MapFrom(
                     src => src.Book.Title));
+
+        CreateMap<ReservationRequestDTO, Reservation>();
+        CreateMap<Reservation, ReservationResponseDTO>()
+            .ForMember(
+                dest => dest.BookId, 
+                opt => opt.MapFrom(
+                    src => src.Book.Id))
+            .ForMember(
+                dest => dest.BookTitle, 
+                opt => opt.MapFrom(
+                    src => src.Book.Title))
+            .ForMember(
+                dest => dest.UserId, 
+                opt => opt.MapFrom(
+                    src => src.User.Id))
+            .ForMember(
+                dest => dest.UserFullName, 
+                opt => opt.MapFrom(
+                    src => src.User.FirstName + " "+ src.User.LastName));
     }
 }
