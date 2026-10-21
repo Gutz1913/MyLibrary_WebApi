@@ -12,6 +12,7 @@ public class BookResponseDTO
     public string? Synopsis { get; set; }
     public bool Active { get; set; } = true;
     public int CopiesCount { get; set; }
+    public int ReservationsCount { get; set; }
     public int PublisherId { get; set; }
     public string PublisherName { get; set; } = string.Empty;
     public int AuthorId { get; set; }
