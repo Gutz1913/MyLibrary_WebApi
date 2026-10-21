@@ -11,16 +11,13 @@ namespace MyLibrary.WebApi.Services.Implementations;
 public class CopyService : ICopyService
 {
     private readonly IBaseRepository<Copy> _copyRepository;
-    private readonly IBaseRepository<Book> _bookRepository;
     private readonly IMapper _mapper;
 
     public CopyService(
         IBaseRepository<Copy> copyRepository, 
-        IBaseRepository<Book> bookRepository, 
         IMapper mapper)
     {
         _copyRepository = copyRepository;
-        _bookRepository = bookRepository;
         _mapper = mapper;
     }
 
