@@ -6,6 +6,7 @@ using MyLibrary.WebApi.Services.Contracts;
 
 namespace MyLibrary.WebApi.Controllers;
 
+[Authorize]
 [Route("api/[controller]")]
 [ApiController]
 public class CategoriesController : ControllerBase
