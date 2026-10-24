@@ -147,7 +147,15 @@ public class BookService : IBookService
         book.PublisherId = request.PublisherId;
 
         await _bookRepository.Update(book);
-        var response = _mapper.Map<BookResponseDTO>(book);
+        var bookWithDetails = await _bookRepository
+            .FindBy(b => b.Id == book.Id)
+            .Include(b => b.Publisher)
+            .Include(b => b.BookAuthors)
+            .ThenInclude(ba => ba.Author)
+            .Include(b => b.BookCategories)
+            .ThenInclude(bc => bc.Category)
+            .FirstOrDefaultAsync();
+        var response = _mapper.Map<BookResponseDTO>(bookWithDetails);
 
         return response;
     }

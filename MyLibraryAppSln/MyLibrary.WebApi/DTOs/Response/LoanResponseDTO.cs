@@ -12,6 +12,8 @@ public class LoanResponseDTO
     public DateTime DueDate { get; set; }
     public DateTime? ReturnDate { get; set; }
     public string State { get; set; } = "Active";
+    public int FineId { get; set; }
+    public decimal FineAmount { get; set; }
     public DateTime? CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }
 }

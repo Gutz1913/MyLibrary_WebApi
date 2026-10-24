@@ -26,6 +26,7 @@ public class LoanService : ILoanService
             .Include(l => l.Copy)
                 .ThenInclude(c => c.Book)
             .Include(l => l.User)
+            .Include(l => l.Fines)
             .AsNoTracking()
             .ToListAsync();
 
@@ -41,6 +42,7 @@ public class LoanService : ILoanService
             .Include(l => l.Copy)
                 .ThenInclude(c => c.Book)
             .Include(l => l.User)
+            .Include(l => l.Fines)
             .FirstOrDefaultAsync();
 
         var response = _mapper.Map<LoanResponseDTO>(loan);
@@ -55,6 +57,7 @@ public class LoanService : ILoanService
             .Include(l => l.Copy)
                 .ThenInclude(c => c.Book)
             .Include(l => l.User)
+            .Include(l => l.Fines)
             .ToListAsync();
 
         var response = _mapper.Map<IEnumerable<LoanResponseDTO>>(loansByUser);

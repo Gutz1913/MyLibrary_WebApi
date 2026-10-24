@@ -21,12 +21,12 @@ public class MappingProfile : Profile
         CreateMap<BookRequestDTO, Book>();
         CreateMap<Book, BookResponseDTO>()
             .ForMember(
-                dest => dest.CopiesCount, 
+                dest => dest.CopiesCount,
                     opt => opt.MapFrom(
-                        src => src != null ? 
+                        src => src != null ?
                             src.Copies.Count : 0))
             .ForMember(
-                dest => dest.ReservationsCount, 
+                dest => dest.ReservationsCount,
                     opt => opt.MapFrom(
                         src => src != null ?
                             src.Reservations.Count : 0))
@@ -35,14 +35,14 @@ public class MappingProfile : Profile
                     opt => opt.MapFrom(
                         src => src.Publisher.Name))
             .ForMember(
-                dest => dest.AuthorId, 
+                dest => dest.AuthorId,
                     opt => opt.MapFrom(
                         src => src.BookAuthors
                             .FirstOrDefault() != null ? src.BookAuthors.FirstOrDefault().AuthorId : 0))
             .ForMember(
-                dest => dest.AuthorName, 
+                dest => dest.AuthorName,
                     opt => opt.MapFrom(
-                        src => src.BookAuthors.FirstOrDefault() != null && src.BookAuthors.FirstOrDefault().Author != null ?                        src.BookAuthors.FirstOrDefault().Author.Name : string.Empty))
+                        src => src.BookAuthors.FirstOrDefault() != null && src.BookAuthors.FirstOrDefault().Author != null ? src.BookAuthors.FirstOrDefault().Author.Name : string.Empty))
             .ForMember(
                 dest => dest.CategoryId,
                     opt => opt.MapFrom(
@@ -63,11 +63,11 @@ public class MappingProfile : Profile
                     opt => opt.MapFrom(
                         src => src.Author.Name))
             .ForMember(
-                dest => dest.BookId, 
+                dest => dest.BookId,
                     opt => opt.MapFrom(
                         src => src.Book.Id))
             .ForMember(
-                dest => dest.BookTitle, 
+                dest => dest.BookTitle,
                     opt => opt.MapFrom(
                         src => src.Book.Title));
 
@@ -93,43 +93,24 @@ public class MappingProfile : Profile
         CreateMap<CopyRequestDTO, Copy>();
         CreateMap<Copy, CopyResponseDTO>()
             .ForMember(
-                dest => dest.BookId, 
+                dest => dest.BookId,
                     opt => opt.MapFrom(
                         src => src.Book.Id))
             .ForMember(
-                dest => dest.BookTitle, 
+                dest => dest.BookTitle,
                     opt => opt.MapFrom(
                         src => src.Book.Title));
 
         CreateMap<ReservationRequestDTO, Reservation>();
         CreateMap<Reservation, ReservationResponseDTO>()
             .ForMember(
-                dest => dest.BookId, 
+                dest => dest.BookId,
                     opt => opt.MapFrom(
                         src => src.Book.Id))
             .ForMember(
-                dest => dest.BookTitle, 
+                dest => dest.BookTitle,
                     opt => opt.MapFrom(
                         src => src.Book.Title))
-            .ForMember(
-                dest => dest.UserId, 
-                    opt => opt.MapFrom(
-                        src => src.User.Id))
-            .ForMember(
-                dest => dest.UserFullName, 
-                    opt => opt.MapFrom(
-                        src => src.User.FirstName + " "+ src.User.LastName));
-
-        CreateMap<LoanRequestDTO, Loan>();
-        CreateMap<Loan, LoanResponseDTO>()
-            .ForMember(
-                dest => dest.BookId, 
-                    opt => opt.MapFrom(
-                        src => src.Copy.BookId))
-            .ForMember(
-                dest => dest.BookTitle, 
-                    opt => opt.MapFrom(
-                        src => src.Copy.Book.Title))
             .ForMember(
                 dest => dest.UserId,
                     opt => opt.MapFrom(
@@ -139,14 +120,47 @@ public class MappingProfile : Profile
                     opt => opt.MapFrom(
                         src => src.User.FirstName + " " + src.User.LastName));
 
-        CreateMap<FineRequestDTO, Fine>();
-        CreateMap<Fine, FineResponseDTO>()
+        CreateMap<LoanRequestDTO, Loan>();
+        CreateMap<Loan, LoanResponseDTO>()
             .ForMember(
-                dest => dest.UserId, 
+                dest => dest.CopyId,
+                opt => opt.MapFrom(
+                    src => src.Copy.Id))
+            .ForMember(
+                dest => dest.BookId,
+                    opt => opt.MapFrom(
+                        src => src.Copy.BookId))
+            .ForMember(
+                dest => dest.BookTitle,
+                    opt => opt.MapFrom(
+                        src => src.Copy.Book.Title))
+            .ForMember(
+                dest => dest.UserId,
                     opt => opt.MapFrom(
                         src => src.User.Id))
             .ForMember(
-                dest => dest.UserFullName, 
+                dest => dest.UserFullName,
+                    opt => opt.MapFrom(
+                        src => src.User.FirstName + " " + src.User.LastName))
+            .ForMember(
+                dest => dest.FineId, 
+                opt => opt.MapFrom(
+                    src => src.Fines.FirstOrDefault() != null ? 
+                    src.Fines.FirstOrDefault()!.Id : 0))
+            .ForMember(
+                dest => dest.FineAmount, 
+                opt => opt.MapFrom(
+                    src => src.Fines.FirstOrDefault() != null ? 
+                    src.Fines.FirstOrDefault()!.Amount : 0m));
+
+        CreateMap<FineRequestDTO, Fine>();
+        CreateMap<Fine, FineResponseDTO>()
+            .ForMember(
+                dest => dest.UserId,
+                    opt => opt.MapFrom(
+                        src => src.User.Id))
+            .ForMember(
+                dest => dest.UserFullName,
                     opt => opt.MapFrom(
                         src => src.User.FirstName + " " + src.User.LastName));
     }
