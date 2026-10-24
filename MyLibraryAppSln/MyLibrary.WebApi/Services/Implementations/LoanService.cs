@@ -111,7 +111,7 @@ public class LoanService : ILoanService
         await _loanRepository.Update(loan);
 
         var loanWithDetails = await _loanRepository
-            .FindBy(l => loan.Id == id)
+            .FindBy(l => l.Id == id)
             .Include(l => l.Copy)
             .ThenInclude(c => c.Book)
             .Include(l => l.User)
