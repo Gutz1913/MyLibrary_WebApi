@@ -12,7 +12,7 @@ builder.Services.AddSwaggerGen();
 var configuration = builder.Configuration;
 
 builder.Services.SetDatabaseConfiguration(configuration);
-builder.Services.SetMyLibraryAuthConfiguration();
+builder.Services.SetMyLibraryAuthConfiguration(configuration);
 builder.Services.SetDependencyInjection();
 builder.Services.AddAutoMapper(cfg => { }, typeof(Program));
 

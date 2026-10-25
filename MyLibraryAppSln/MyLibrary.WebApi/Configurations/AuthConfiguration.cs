@@ -9,7 +9,7 @@ namespace MyLibrary.WebApi.Configurations;
 
 public static class AuthConfigurations
 {
-    public static IServiceCollection SetMyLibraryAuthConfiguration(this IServiceCollection services)
+    public static IServiceCollection SetMyLibraryAuthConfiguration(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddIdentity<IdentityUser, IdentityRole>(options =>
         {
@@ -41,7 +41,7 @@ public static class AuthConfigurations
                 ValidateIssuerSigningKey = true,
                 //ValidIssuer = "tu_issuer",
                 //ValidAudience = "tu_audience",
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable(MyLibraryLiterals.JWT_KEY)))
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JwtSettings:Secret"]))
                 //ClockSkew = TimeSpan.Zero // Evita un desfase de tiempo al validar el token (opcional)
             };
         });
