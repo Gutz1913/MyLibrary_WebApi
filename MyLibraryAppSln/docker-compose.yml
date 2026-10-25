@@ -1,0 +1,27 @@
+services:
+  webapi:
+    build:
+      context: .
+      dockerfile: MyLibrary.WebApi/Dockerfile
+    ports:
+      - "38891:8080"
+    depends_on:
+      - db
+    environment:
+      - ConnectionStrings__DefaultConnection=Server=db;Database=myLibraryDB;User=sa;Password=Your_password123;Encrypt=false;
+    networks:
+      - mylibrarynet
+
+  db:
+    image: mcr.microsoft.com/mssql/server:latest
+    environment:
+      SA_PASSWORD: "Your_password123"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "38892:1433"
+    networks:
+      - mylibrarynet
+
+networks:
+  mylibrarynet:
+    driver: bridge
